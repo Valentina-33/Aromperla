@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cliente</title>
+</head>
+<body>
+    <h1>Palíndromos y factorial</h1>
+
+    <label>Palabra:</label>
+    <input type="text" id="palabra" value="reconocer"><br><br>
+    <button onclick="palindrome()">Palíndromo</button>
+    <div id="respuestaPalindrome"></div>
+
+    <br>
+
+    <label>Número:</label>
+    <input type="text" id="numero" value="5"><br><br>
+    <button onclick="factorial()">Factoria</button>
+    <div id="respuestaFactorial"></div>
+
+</body>
+<script>
+    function palindrome() {
+        let palabra = document.getElementById("palabra").value;
+        fetch("/palindrome?input=" + encodeURIComponent(palabra))
+            .then(r => r.text())
+            .then(t => document.getElementById("respuestaPalindrome").innerHTML = t);
+    }
+
+    function factorial() {
+        let numero = document.getElementById("numero").value;
+        fetch("/factorial?input=" + encodeURIComponent(numero))
+            .then(r => r.text())
+            .then(t => document.getElementById("respuestaFactorial").innerHTML = t);
+    }
+</script>
+</html>
